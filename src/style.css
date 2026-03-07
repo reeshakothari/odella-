@@ -396,4 +396,5 @@ body {
   .nav-hide-mobile { display: none; }
   .nav-show-mobile { display: block; }
   .main { padding: 2rem 1.25rem 4rem; }
+  #float-videos-btn { display: none; }
 }
