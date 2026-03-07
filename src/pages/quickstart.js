@@ -15,7 +15,7 @@ export const quickstartPage = `
   <div class="intro-block reveal" id="qs-intro-welcome">
     <h3>Welcome to Odella</h3>
     <p>Odella puts an AI workforce at your fingertips — a team of digital employees that handle the day-to-day so your people can focus on what only humans can do. Set up in minutes, scale in seconds, no engineering degree required.</p>
-    <img src="../Downloads/Screenshot 2026-03-07 142727.png" alt="Odella – Your AI Workforce Factory"
+    <img src="/odella-screenshot.png" alt="Odella – Your AI Workforce Factory"
       style="width:100%;border-radius:12px;margin-top:1.25rem;display:block;box-shadow:0 4px 20px rgba(108,71,255,0.1);" />
   </div>
 
