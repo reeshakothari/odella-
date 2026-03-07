@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odella.ai – Get Started</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand:      #6C47FF;
+      --brand-mid:  #8B6AFF;
+      --brand-dark: #4a2dd4;
+      --brand-glow: rgba(108,71,255,0.14);
+      --text:       #0f0f1a;
+      --sub:        #4b5563;
+      --muted:      #9ca3af;
+      --bg:         #ffffff;
+      --surface:    #f8f7ff;
+      --border:     #e5e7eb;
+      --sidebar-bg: #fafafa;
+      --nav-h:      58px;
+      --left-w:     250px;
+      --right-w:    220px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── TOP NAV ─── */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.75rem;
+      z-index: 200;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .nav-brand svg { width: 28px; height: 28px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      padding: 0.38rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--sub);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links a:hover { background: var(--surface); color: var(--brand); }
+
+    .nav-links .active-link { color: var(--text); font-weight: 600; }
+
+    .nav-cta {
+      background: var(--brand) !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+      border-radius: 8px !important;
+      transition: background 0.15s !important;
+    }
+
+    .nav-cta:hover { background: var(--brand-dark) !important; }
+
+    /* ─── THREE-COLUMN LAYOUT ─── */
+    .shell {
+      display: grid;
+      grid-template-columns: var(--left-w) 1fr;
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+    }
+
+    /* ─── LEFT SIDEBAR ─── */
+    .left-sidebar {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      width: var(--left-w);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0.75rem 2rem;
+    }
+
+    .left-sidebar::-webkit-scrollbar { width: 3px; }
+    .left-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    .nav-section { margin-bottom: 1.75rem; }
+
+    .nav-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 0.6rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .nav-section ul { list-style: none; }
+    .nav-section li { margin-bottom: 1px; }
+
+    .nav-section a {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.42rem 0.65rem;
+      border-radius: 7px;
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .nav-section a svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.55; }
+
+    .nav-section a:hover { background: rgba(108,71,255,0.07); color: var(--brand); }
+
+    .nav-section a.active {
+      background: rgba(108,71,255,0.1);
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    .nav-section a.active svg { opacity: 1; }
+
+    .nav-section a.dim { opacity: 0.38; pointer-events: none; }
+
+    /* ─── MAIN ─── */
+    .main {
+      grid-column: 2;
+      padding: 3rem 3.5rem 6rem;
+      min-width: 0;
+      max-width: 800px;
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header { margin-bottom: 2.5rem; }
+
+    .breadcrumb {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 0.45rem;
+    }
+
+    .page-title {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-sub {
+      font-size: 1rem;
+      color: var(--sub);
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .page-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.32rem 0.75rem;
+      background: var(--bg);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .copy-btn:hover { border-color: var(--brand); color: var(--brand); }
+
+    /* ─── STEP BLOCK ─── */
+    .step-block {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-block:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .step-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .step-chip {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: rgba(108,71,255,0.08);
+      border: 1px solid rgba(108,71,255,0.18);
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .step-line { flex: 1; height: 1px; background: var(--border); }
+
+    .step-block h2 {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.55rem;
+      scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--sub);
+      margin-bottom: 1.75rem;
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    /* ─── VIDEO ─── */
+    .video-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: #0f0726;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(108,71,255,0.1);
+      margin-bottom: 0.75rem;
+    }
+
+    .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .video-caption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .video-caption::before, .video-caption::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+
+    /* ─── SUBSTEP CARDS ─── */
+    .substep-grid { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem; }
+
+    .substep-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+
+    .substep-card:hover {
+      border-color: rgba(108,71,255,0.28);
+      box-shadow: 0 3px 16px var(--brand-glow);
+      transform: translateX(3px);
+    }
+
+    .sc-num {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sc-body h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+
+    .sc-body p, .sc-body li { font-size: 0.85rem; color: var(--sub); line-height: 1.65; }
+
+    .sc-body ul { padding-left: 1.1rem; margin-top: 0.25rem; }
+    .sc-body li { margin-bottom: 0.2rem; }
+
+    /* ─── TIP BOX ─── */
+    .tip-box {
+      display: flex;
+      gap: 0.75rem;
+      background: #fefce8;
+      border: 1px solid #fde68a;
+      border-radius: 9px;
+      padding: 0.9rem 1rem;
+      font-size: 0.845rem;
+      color: #78350f;
+    }
+
+    .tip-box svg { flex-shrink: 0; margin-top: 2px; width: 15px; height: 15px; }
+
+    /* ─── PLACEHOLDER ─── */
+    .placeholder-card {
+      border: 1.5px dashed var(--border);
+      border-radius: 11px;
+      padding: 2.25rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .placeholder-card .ph-icon { font-size: 1.75rem; margin-bottom: 0.45rem; }
+    .placeholder-card h4 { font-size: 0.875rem; font-weight: 600; color: var(--sub); margin-bottom: 0.25rem; }
+    .placeholder-card p { font-size: 0.8rem; }
+
+    /* ─── NEXT STEP PILL ─── */
+    .next-pill {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 1.75rem;
+    }
+
+    .next-pill a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--brand);
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(108,71,255,0.22);
+      border-radius: 999px;
+      background: rgba(108,71,255,0.04);
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+
+    .next-pill a:hover { background: rgba(108,71,255,0.1); border-color: var(--brand); transform: translateX(3px); }
+
+    /* ─── RIGHT SIDEBAR ─── */
+    .right-sidebar {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 220px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      z-index: 90;
+    }
+
+    .otp-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .otp-title svg { width: 11px; height: 11px; }
+
+    .otp-list { list-style: none; border-left: 2px solid var(--border); }
+
+    .otp-list a {
+      display: block;
+      padding: 0.28rem 0 0.28rem 0.8rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      margin-left: -2px;
+      transition: color 0.12s, border-color 0.12s;
+      line-height: 1.45;
+    }
+
+    .otp-list a:hover { color: var(--brand); }
+
+    .otp-list a.active {
+      color: var(--brand);
+      border-left-color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* ─── PREV/NEXT PAGE NAV ─── */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .pn-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      flex: 1;
+      max-width: 210px;
+      background: var(--bg);
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .pn-btn:hover { border-color: var(--brand); background: var(--surface); }
+    .pn-btn.next { align-items: flex-end; margin-left: auto; }
+    .pn-label { font-size: 0.7rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .pn-title { font-size: 0.875rem; font-weight: 600; color: var(--brand); }
+
+    /* ─── FOOTER ─── */
+    .content-footer {
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .content-footer a { color: var(--brand); text-decoration: none; }
+
+    /* ─── INTRO SECTION ─── */
+    .intro-block { padding: 2.5rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
+
+    .intro-block h3 {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.55rem;
+      scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+    }
+
+    .intro-block p {
+      font-size: 0.9rem;
+      color: var(--sub);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+
+    .intro-block p:last-child { margin-bottom: 0; }
+
+    .intro-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin: 0.75rem 0 0;
+    }
+
+    .intro-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--sub);
+    }
+
+    .intro-bullets li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex-shrink: 0;
+      margin-top: 0.45em;
+    }
+
+    .intro-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 1.1rem;
+    }
+
+    .intro-card {
+      padding: 1.1rem 1.15rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .intro-card:hover {
+      border-color: rgba(108,71,255,0.28);
+      box-shadow: 0 3px 16px var(--brand-glow);
+    }
+
+    .intro-card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: rgba(108,71,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .intro-card-icon svg { width: 15px; height: 15px; stroke: var(--brand); }
+
+    .intro-card h4 { font-size: 0.875rem; font-weight: 700; margin-bottom: 0.3rem; }
+
+    .intro-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin: 0; max-width: none; }
+
+    .intro-wide { grid-column: 1 / -1; }
+
+    /* ─── PAGE VISIBILITY ─── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 780px) {
+      .right-sidebar { display: none; }
+    }
+
+    @media (max-width: 780px) {
+      :root { --left-w: 0px; }
+      .left-sidebar { display: none; }
+      .shell { grid-template-columns: 1fr; }
+      .main { padding: 2rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<header class="topnav">
+  <a class="nav-brand" href="#" onclick="showPage('quickstart');return false;">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M20 4C14 4 10 9 10 14C10 19 14 20 20 20C26 20 30 19 30 14C30 9 26 4 20 4Z" fill="#6C47FF"/>
+      <path d="M20 36C26 36 30 31 30 26C30 21 26 20 20 20C14 20 10 21 10 26C10 31 14 36 20 36Z" fill="#6C47FF"/>
+      <path d="M4 20C4 14 9 10 14 10C19 10 20 14 20 20C20 26 19 30 14 30C9 30 4 26 4 20Z" fill="#6C47FF"/>
+      <path d="M36 20C36 26 31 30 26 30C21 30 20 26 20 20C20 14 21 10 26 10C31 10 36 14 36 20Z" fill="#6C47FF"/>
+    </svg>
+    Odella
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://odella.ai" target="_blank" class="nav-cta">Go to Odella</a></li>
+  </ul>
+</header>
+
+<!-- ─── FLOATING VIDEO TUTORIALS BUTTON ─── -->
+<a onclick="showPage('videos')" id="float-videos-btn" style="position:fixed;top:50vh;transform:translateY(-50%);right:2rem;width:220px;z-index:200;display:flex;align-items:center;justify-content:center;gap:0.45rem;background:var(--brand);color:#fff;padding:0.55rem 1rem;border-radius:8px;font-weight:600;font-size:0.82rem;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;box-shadow:0 2px 12px rgba(108,71,255,0.35);transition:background 0.15s;" onmouseover="this.style.background='var(--brand-dark)'" onmouseout="this.style.background='var(--brand)'">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+  Video Tutorials
+</a>
+
+<!-- ─── SHELL ─── -->
+<div class="shell">
+
+  <!-- ─── LEFT SIDEBAR ─── -->
+  <nav class="left-sidebar">
+    <div class="nav-section">
+      <p class="nav-section-label">Get Started</p>
+      <ul>
+        <li>
+          <a onclick="showPage('quickstart')" id="nav-quickstart" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Quickstart Guide
+          </a>
+        </li>
+        <li>
+          <a onclick="showPage('quickstart');setTimeout(()=>{const el=document.getElementById('qs-step1');if(el)el.scrollIntoView({behavior:'smooth'})},100)" style="padding-left:2rem;font-size:0.8rem;color:var(--sub);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Create your account
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <p class="nav-section-label">Product Overview</p>
+      <ul>
+        <li>
+          <a onclick="showPage('videos')" id="nav-videos" style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="display:flex;align-items:center;gap:0.5rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              Video Tutorials
+            </span>
+            <span style="background:var(--brand);color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;padding:2px 7px;border-radius:20px;text-transform:uppercase;flex-shrink:0;">New</span>
+          </a>
+        </li>
+        <li>
+          <a onclick="showPage('workforce')" id="nav-workforce">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Workforce
+          </a>
+        </li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Templates</a></li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Workflows</a></li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Documents</a></li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security</a></li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Models</a></li>
+        <li><a class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Integrations</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main">
+
+    <!-- ══ PAGE: QUICKSTART ══ -->
+    <div class="page active" id="page-quickstart">
+      <div class="page-header">
+        <p class="breadcrumb">Get Started</p>
+        <h1 class="page-title">Quickstart Guide</h1>
+        <p class="page-sub">Get your AI workforce up and running in minutes — no technical setup required.</p>
+        <div class="page-actions">
+          <button class="copy-btn" onclick="copyLink()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy page
+          </button>
+        </div>
+      </div>
+
+      <!-- ── INTRO ── -->
+      <div class="intro-block reveal" id="qs-intro-welcome">
+        <h3>Welcome to Odella</h3>
+        <p>Odella puts an AI workforce at your fingertips — a team of digital employees that handle the day-to-day so your people can focus on what only humans can do. Set up in minutes, scale in seconds, no engineering degree required.</p>
+        <img
+          src="../Downloads/Screenshot 2026-03-07 142727.png"
+          alt="Odella – Your AI Workforce Factory"
+          style="width:100%;border-radius:12px;margin-top:1.25rem;display:block;box-shadow:0 4px 20px rgba(108,71,255,0.1);"
+        />
+      </div>
+
+      <div class="intro-block reveal" id="qs-intro-model">
+        <h3>A New Way to Work</h3>
+        <p>Think of Odella's AI agents as tireless colleagues: they read, write, reason, and act — following your rules and your precedents. You get the output; they handle the grind.</p>
+        <ul class="intro-bullets">
+          <li>AI agents take care of repetitive, process-heavy work so your team isn't stuck doing it</li>
+          <li>Your people stay focused on judgement, relationships, and the work that actually needs a human</li>
+          <li>Grow your output without growing your headcount — quality stays consistent as you scale</li>
+        </ul>
+      </div>
+
+      <div class="intro-block reveal" id="qs-intro-capabilities">
+        <h3>What You Can Build</h3>
+        <p>Odella gives you four core capabilities you can mix and match to fit exactly how your organisation works.</p>
+        <div class="intro-cards">
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h4>Template Automation</h4>
+            <p>Turn your existing documents and precedents into smart templates. Pull in data from any source and watch hours of drafting collapse into seconds.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h4>AI Process Automation</h4>
+            <p>Design custom workflows that mirror your exact processes — connect any tool, transform any data, and let your AI handle the handoffs.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4>AI Workforces</h4>
+            <p>Stand up virtual teams that work alongside your people. Delegate tasks, assign roles, and scale capacity on demand — no hiring, no onboarding.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h4>Private Knowledge Bases</h4>
+            <p>Feed your organisation's internal knowledge directly to your AI workforce. Your agents work with your expertise, not generic training data.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-block reveal" id="qs-intro-enterprise">
+        <h3>Built to Enterprise Standard</h3>
+        <div class="intro-cards">
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4>Enterprise-Grade Security</h4>
+            <p>End-to-end encryption, full data isolation, role-based access controls, and SSO support. SOC 2 compliance in progress — your data never leaves your control.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h4>Seamless Integration</h4>
+            <p>Odella slots into your existing stack. Connect the tools your team already uses and let AI work inside your real workflows — not alongside them.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step-block reveal" id="qs-step1">
+        <div class="step-tag-row">
+          <span class="step-chip">Step 01</span>
+          <div class="step-line"></div>
+        </div>
+        <h2>Create Your Account</h2>
+        <p class="step-desc">Get into Odella in under two minutes. No credit card required — just pick your sign-in method and you're in.</p>
+
+        <!-- Video first -->
+        <div class="video-wrap">
+          <video autoplay muted loop playsinline>
+            <source src="../Downloads/WhatsApp Video 2026-03-07 at 1.09.23 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: Creating your Odella account from start to finish</p>
+
+        <div class="substep-grid">
+          <div class="substep-card">
+            <div class="sc-num">1</div>
+            <div class="sc-body">
+              <h4>Choose Your Sign-Up Method</h4>
+              <ul>
+                <li>Click <strong>Continue with Google</strong> or <strong>Continue with Microsoft</strong> for instant one-click access</li>
+                <li>Or use your email: enter your name and email address to receive a verification link</li>
+              </ul>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">2</div>
+            <div class="sc-body">
+              <h4>Verify Your Email</h4>
+              <p>Check your inbox — including spam — for a verification email from Odella. Click the link to activate your account instantly.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">3</div>
+            <div class="sc-body">
+              <h4>Complete Your Profile</h4>
+              <p>Answer a few short questions so Odella can tailor the experience to your organisation's size, industry, and goals. Takes under 60 seconds.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Tip:</strong> Signing in with Google or Microsoft is the fastest option — you'll be inside Odella in seconds with no password to set.</span>
+        </div>
+
+        <div class="next-pill"><a href="#qs-step2">Continue to Step 2 &rarr;</a></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-block reveal" id="qs-step2">
+        <div class="step-tag-row">
+          <span class="step-chip">Step 02</span>
+          <div class="step-line"></div>
+        </div>
+        <h2>Meet Your AI Workforce</h2>
+        <p class="step-desc">Once you're signed in, you land on your Workforce Overview — your round-the-clock team of specialised AI employees, each built for a specific job. Here's who's on your team:</p>
+
+        <div class="substep-grid">
+          <div class="substep-card">
+            <div class="sc-num">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="sc-body">
+              <h4>Document Processor</h4>
+              <p>Takes in documents, pulls out the data that matters, and validates it automatically. Forms, applications, contracts — handled without anyone lifting a finger.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="sc-body">
+              <h4>Research Assistant</h4>
+              <p>Scours multiple sources, synthesises the findings, and delivers thorough reports — so your team gets the insight without the digging.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="sc-body">
+              <h4>Operations Specialist</h4>
+              <p>Keeps your workflows moving — managing task routing, handoffs, and process continuity so nothing slips through the cracks.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>
+            </div>
+            <div class="sc-body">
+              <h4>Data Analyst</h4>
+              <p>Crunches your numbers, surfaces the patterns, and builds clear visualisations — giving decision-makers what they need to act with confidence.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="next-pill"><a href="#qs-step3">Continue to Step 3 &rarr;</a></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-block reveal" id="qs-step3">
+        <div class="step-tag-row">
+          <span class="step-chip">Step 03</span>
+          <div class="step-line"></div>
+        </div>
+        <h2>Start Automating</h2>
+        <p class="step-desc">Your workforce is ready. Here's how to put it to work and reshape the way your organisation operates:</p>
+
+        <div class="intro-cards" style="margin-bottom:2rem;">
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4>Free Up Your Team</h4>
+            <p>Hand off the repetitive work to your AI employees. Your people get their time back to focus on strategy, relationships, and the decisions that genuinely need a human.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h4>Scale Without Hiring</h4>
+            <p>Your AI employees work 24/7 and can take on more the moment you need them to. Grow your output without adding headcount or going through an interview process.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h4>Start with Templates</h4>
+            <p>Don't start from scratch. Pick a pre-built workflow for common tasks, customise it to your context, and have it running in minutes.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h4>Build Custom Workflows</h4>
+            <p>When templates aren't enough, design your own automations with the visual workflow builder. No coding required — just drag, connect, and deploy.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h4>Integrate Seamlessly</h4>
+            <p>Odella connects to the tools your team already uses. Your AI workforce works inside your real environment — not off to the side in a separate system.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4>Enterprise Security</h4>
+            <p>End-to-end encryption and complete data isolation as standard. SOC 2 compliance is actively underway — your data stays yours, always.</p>
+          </div>
+        </div>
+
+        <!-- What's Next -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.5rem 1.6rem;margin-top:0.5rem;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">What's Next</p>
+          <div style="display:flex;flex-direction:column;gap:0.65rem;">
+            <a onclick="showPage('workforce');return false;" href="#" style="display:flex;align-items:center;gap:0.85rem;padding:0.85rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:9px;text-decoration:none;color:var(--text);transition:border-color 0.15s,box-shadow 0.15s;" onmouseover="this.style.borderColor='rgba(108,71,255,0.35)';this.style.boxShadow='0 2px 12px rgba(108,71,255,0.08)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(108,71,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6C47FF" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <p style="font-size:0.875rem;font-weight:700;margin:0 0 0.1rem;color:var(--text);">Meet Your Workforce</p>
+                <p style="font-size:0.78rem;color:var(--muted);margin:0;">Get to know your AI-powered team and what each member specialises in</p>
+              </div>
+              <svg style="margin-left:auto;flex-shrink:0;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a onclick="showPage('videos');return false;" href="#" style="display:flex;align-items:center;gap:0.85rem;padding:0.85rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:9px;text-decoration:none;color:var(--text);transition:border-color 0.15s,box-shadow 0.15s;" onmouseover="this.style.borderColor='rgba(108,71,255,0.35)';this.style.boxShadow='0 2px 12px rgba(108,71,255,0.08)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(108,71,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6C47FF" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              </div>
+              <div>
+                <p style="font-size:0.875rem;font-weight:700;margin:0 0 0.1rem;color:var(--text);">Explore Workflows</p>
+                <p style="font-size:0.78rem;color:var(--muted);margin:0;">Learn how to build and manage automations that reshape your operations</p>
+              </div>
+              <svg style="margin-left:auto;flex-shrink:0;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" style="display:flex;align-items:center;gap:0.85rem;padding:0.85rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:9px;text-decoration:none;color:var(--text);transition:border-color 0.15s,box-shadow 0.15s;" onmouseover="this.style.borderColor='rgba(108,71,255,0.35)';this.style.boxShadow='0 2px 12px rgba(108,71,255,0.08)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(108,71,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6C47FF" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div>
+                <p style="font-size:0.875rem;font-weight:700;margin:0 0 0.1rem;color:var(--text);">Browse Templates</p>
+                <p style="font-size:0.78rem;color:var(--muted);margin:0;">Kick off with ready-made templates and automate common tasks straight away</p>
+              </div>
+              <svg style="margin-left:auto;flex-shrink:0;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <div></div>
+        <a class="pn-btn next" onclick="showPage('workforce');return false;" href="#">
+          <span class="pn-label">Next &rarr;</span>
+          <span class="pn-title">Workforce</span>
+        </a>
+      </div>
+      <p class="content-footer">Made for <a href="https://odella.ai" target="_blank">Odella.ai</a></p>
+    </div>
+
+    <!-- ══ PAGE: FAQ ══ -->
+    <div class="page" id="page-faq">
+      <div class="page-header">
+        <p class="breadcrumb">Get Started</p>
+        <h1 class="page-title">Frequently Asked Questions</h1>
+        <p class="page-sub">Common questions about getting started with Odella.</p>
+      </div>
+
+      <div class="step-block reveal" id="faq-what">
+        <h2>What is Odella?</h2>
+        <p class="step-desc">Odella is an AI workforce platform that lets you create, deploy, and manage AI-powered digital employees. They handle tasks like research, content generation, data processing, and customer communication — at scale, 24/7.</p>
+      </div>
+
+      <div class="step-block reveal" id="faq-start">
+        <h2>How do I get started?</h2>
+        <p class="step-desc">Follow the <a href="#" onclick="showPage('quickstart');return false;" style="color:var(--brand);font-weight:600;">Quickstart Guide</a>. Sign up, set up your workspace, and launch your first workflow — no developer needed.</p>
+      </div>
+
+      <div class="step-block reveal" id="faq-free">
+        <h2>Is there a free plan?</h2>
+        <p class="step-desc">Yes. Odella offers a free tier to explore the platform. Visit <a href="https://odella.ai" target="_blank" style="color:var(--brand);">odella.ai</a> for current pricing details.</p>
+      </div>
+
+      <div class="step-block reveal" id="faq-secure">
+        <h2>Is my data secure?</h2>
+        <p class="step-desc">Absolutely. Odella uses enterprise-grade security: encryption at rest and in transit, role-based access control, SSO support, and audit logs. Your data is never used to train third-party AI models.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-btn" onclick="showPage('quickstart');return false;" href="#">
+          <span class="pn-label">&larr; Previous</span>
+          <span class="pn-title">Quickstart Guide</span>
+        </a>
+        <a class="pn-btn next" onclick="showPage('videos');return false;" href="#">
+          <span class="pn-label">Next &rarr;</span>
+          <span class="pn-title">Video Tutorials</span>
+        </a>
+      </div>
+      <p class="content-footer">Made for <a href="https://odella.ai" target="_blank">Odella.ai</a></p>
+    </div>
+
+    <!-- ══ PAGE: VIDEOS ══ -->
+    <div class="page" id="page-videos">
+      <div class="page-header">
+        <p class="breadcrumb">Product Overview</p>
+        <h1 class="page-title">Video Tutorials</h1>
+        <p class="page-sub">Step-by-step walkthroughs of everything Odella can do.</p>
+      </div>
+
+      <div class="step-block reveal" id="vid-featured">
+        <h2>Getting Started</h2>
+        <p class="step-desc">A complete walkthrough — from creating your account to launching your first AI workflow.</p>
+        <div class="video-wrap" style="margin-bottom:0.75rem;">
+          <video autoplay muted loop playsinline controls>
+            <source src="../Downloads/WhatsApp Video 2026-03-07 at 1.09.23 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: Full Odella onboarding walkthrough</p>
+      </div>
+
+      <div class="step-block reveal" id="vid-more">
+        <h2>The AI Workforce Factory</h2>
+        <p class="step-desc">See how Odella lets you design, build, and deploy purpose-built AI employees that work to your standards around the clock.</p>
+        <div class="video-wrap" style="margin-bottom:0.75rem;">
+          <video autoplay muted loop playsinline controls>
+            <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.05.43 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: The AI Workforce Factory overview</p>
+      </div>
+
+      <div class="step-block reveal" id="vid-build">
+        <h2>Building Your AI Employees</h2>
+        <p class="step-desc">A step-by-step walkthrough of creating a custom AI employee — from defining a role to deploying it in your workflow.</p>
+        <div class="video-wrap" style="margin-bottom:0.75rem;">
+          <video autoplay muted loop playsinline controls>
+            <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.13.04 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: Building your AI employees step by step</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-btn" onclick="showPage('faq');return false;" href="#">
+          <span class="pn-label">&larr; Previous</span>
+          <span class="pn-title">FAQ</span>
+        </a>
+        <a class="pn-btn next" onclick="showPage('workforce');return false;" href="#">
+          <span class="pn-label">Next &rarr;</span>
+          <span class="pn-title">Workforce</span>
+        </a>
+      </div>
+      <p class="content-footer">Made for <a href="https://odella.ai" target="_blank">Odella.ai</a></p>
+    </div>
+
+    <!-- ══ PAGE: WORKFORCE ══ -->
+    <div class="page" id="page-workforce">
+      <div class="page-header">
+        <p class="breadcrumb">Product Overview</p>
+        <h1 class="page-title">Workforce</h1>
+        <p class="page-sub">Build digital employees that execute tasks, follow your precedents, and scale on demand — without adding headcount.</p>
+        <div class="page-actions">
+          <button class="copy-btn" onclick="copyLink()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy page
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 1: The AI Workforce Factory -->
+      <div class="intro-block reveal" id="wf-factory">
+        <h3>The AI Workforce Factory</h3>
+        <p>Odella is where you design, build, and deploy your AI workforce. Define a role, set the task, connect your systems and templates — then hit publish. Your new AI employee is live, working to your standards, around the clock.</p>
+        <p>These aren't general-purpose assistants. They're purpose-built employees that slot into your real workflows, handle your process work, and free your team to focus on the judgement-heavy tasks that actually need a human.</p>
+
+        <div class="video-wrap" style="margin-bottom:1rem;">
+          <video autoplay muted loop playsinline controls>
+            <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.05.43 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: The AI Workforce Factory overview</p>
+
+        <div class="intro-cards">
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h4>Scale Without Headcount</h4>
+            <p>Bring on AI employees in minutes, not months. Add capacity exactly when you need it — without the overhead of hiring, onboarding, or managing more people.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h4>Work Where You Work</h4>
+            <p>Delegate via email, chat, Slack, or Teams — the same way you'd hand something off to a colleague. No new system to learn, no workflow overhaul required.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h4>Always On</h4>
+            <p>AI employees don't burn out, take holidays, or miss deadlines. They're available 24/7, handling your workload consistently whether it's 9am or 3am.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h4>Trained on Your Precedents</h4>
+            <p>Each AI employee learns your firm's tone, preferences, and way of working. They execute tasks to your standards — not to a generic default.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Building Your AI Employees -->
+      <div class="intro-block reveal" id="wf-build">
+        <h3>Building Your AI Employees</h3>
+        <p>You can deploy a pre-built AI employee or create a custom one from scratch. Here's how to build a new one:</p>
+
+        <div class="video-wrap" style="margin-bottom:1rem;">
+          <video autoplay muted loop playsinline controls>
+            <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.13.04 PM.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-caption">Watch: Building your AI employees step by step</p>
+
+        <div class="substep-grid" style="margin-top:1.25rem;">
+          <div class="substep-card">
+            <div class="sc-num">1</div>
+            <div class="sc-body">
+              <h4>Open the Workforce Overview</h4>
+              <p>Head to the Workforce Overview page in your dashboard and click <strong>Create New Worker</strong>.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">2</div>
+            <div class="sc-body">
+              <h4>Fill Out the Employee Form</h4>
+              <ul>
+                <li><strong>Avatar</strong> — pick one for quick visual identification</li>
+                <li><strong>Name</strong> — something that reflects the role, like "Document Processor" or "Research Analyst"</li>
+                <li><strong>Role</strong> — the specific function this employee will carry out</li>
+                <li><strong>Description</strong> — the tasks and responsibilities they'll own</li>
+                <li><strong>Generate with AI</strong> — just tell Odella the role you want (e.g. "social media manager" or "invoice processor") and it will automatically fill in the name, role, and description for you</li>
+              </ul>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">3</div>
+            <div class="sc-body">
+              <h4>Save and Configure</h4>
+              <p>Click <strong>Save Assistant</strong>. Your new employee appears on the Workforce Overview. Click their profile to connect workflows, attach knowledge bases, and manage their settings.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top:1.25rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div>
+            <strong>Best practices for effective AI employees:</strong>
+            <ul style="padding-left:1.1rem;margin-top:0.4rem;font-size:0.835rem;">
+              <li>Give each employee a narrow, well-defined role that maps to a real workflow need</li>
+              <li>Connect relevant knowledge bases so they can draw on your organisation's expertise</li>
+              <li>Start with simple tasks, then expand their capabilities as you build confidence</li>
+              <li>Use names that describe what they do — it makes delegation feel natural</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Delegation Channels -->
+      <div class="intro-block reveal" id="wf-delegate">
+        <h3>Delegate Work Like You Would to Any Employee</h3>
+        <p>Your AI employees live inside the tools your team already uses. Hand off work the same way you would to a human colleague — no new interface to learn.</p>
+        <div class="intro-cards">
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h4>Email</h4>
+            <p>Send tasks directly to your AI employee's inbox. They reply, follow up, and deliver results just like a real team member would.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h4>Chat</h4>
+            <p>Use the built-in web chat for back-and-forth conversation. Ideal for quick tasks, clarifications, and anything you'd normally handle in real time.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.08 9c-.22-4.05-3.6-7.27-7.68-7.27a7.72 7.72 0 0 0-7.72 7.72c0 1.19.27 2.31.74 3.32L5 17l4.23-2.4a7.65 7.65 0 0 0 3.17.69c.08 0 .16 0 .24-.01"/><circle cx="18" cy="18" r="4"/><line x1="18" y1="16" x2="18" y2="18"/><line x1="18" y1="20" x2="18.01" y2="20"/></svg>
+            </div>
+            <h4>Slack</h4>
+            <p>Add AI employees to your Slack workspace. Mention them in a channel or send them a direct message — they'll get to work straight away.</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h4>Microsoft Teams</h4>
+            <p>Bring AI employees into your Teams environment. They join the conversation, pick up tasks, and collaborate within your existing workflow.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Connecting Applications -->
+      <div class="intro-block reveal" id="wf-connect">
+        <h3>Connecting Applications</h3>
+        <p>Once your AI employee exists, you configure what they can access and how they receive work. Here's how:</p>
+
+        <div class="substep-grid" style="margin-top:1.25rem;">
+          <div class="substep-card">
+            <div class="sc-num">1</div>
+            <div class="sc-body">
+              <h4>Go to the Employee's Profile</h4>
+              <p>Select the AI employee from your Workforce Overview and open their <strong>Applications</strong> tab.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">2</div>
+            <div class="sc-body">
+              <h4>Choose a Communication Channel</h4>
+              <p>Pick how this employee receives work — email, chat, Slack, or Teams — based on how your team prefers to delegate.</p>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">3</div>
+            <div class="sc-body">
+              <h4>Connect Knowledge, Workflows &amp; Templates</h4>
+              <ul>
+                <li><strong>Knowledge Bases</strong> — give them access to your internal expertise and precedents</li>
+                <li><strong>Workflows</strong> — assign the automations they're authorised to run</li>
+                <li><strong>Templates</strong> — attach document templates they can populate automatically</li>
+                <li><strong>Tools</strong> — connect the apps and integrations this employee is permitted to use</li>
+              </ul>
+            </div>
+          </div>
+          <div class="substep-card">
+            <div class="sc-num">4</div>
+            <div class="sc-body">
+              <h4>Review and Publish</h4>
+              <p>Check the configuration, then click <strong>Publish</strong> to deploy. Your AI employee is live and ready to receive work.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top:1.25rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Give workflows clear, descriptive titles. Your AI employees match incoming tasks to available workflows by name — the more specific the title, the more accurately they'll route work.</span>
+        </div>
+      </div>
+
+      <!-- Section 5: Scale -->
+      <div class="intro-block reveal" id="wf-scale" style="border-bottom:none;">
+        <h3>Scale Your Operations Without Scaling Costs</h3>
+        <p>With Odella's AI workforce, capacity is no longer a constraint. Deploy new employees in minutes, not months. Your team shifts its focus to strategy, client relationships, and high-value outcomes — while AI handles the volume work that used to eat everyone's time.</p>
+        <p>The more you build, the more you can delegate. Start with one employee and one workflow, then grow from there.</p>
+        <div style="margin-top:1.5rem;">
+          <a onclick="showPage('quickstart');return false;" href="#" class="btn-primary" style="display:inline-block;background:var(--brand);color:#fff;padding:0.7rem 1.6rem;border-radius:9px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:background 0.15s;">Start Building Your AI Workforce &rarr;</a>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-btn" onclick="showPage('videos');return false;" href="#">
+          <span class="pn-label">&larr; Previous</span>
+          <span class="pn-title">Video Tutorials</span>
+        </a>
+      </div>
+      <p class="content-footer">Made for <a href="https://odella.ai" target="_blank">Odella.ai</a></p>
+    </div>
+
+  </main>
+
+  <!-- ─── RIGHT SIDEBAR ─── -->
+  <aside class="right-sidebar">
+    <p class="otp-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+      On this page
+    </p>
+    <ul class="otp-list" id="otp-list"></ul>
+  </aside>
+
+</div>
+
+<script>
+  const pages = {
+    quickstart: {
+      nav: 'nav-quickstart',
+      sections: [
+        { id: 'qs-intro-welcome',      label: 'Welcome to Odella' },
+        { id: 'qs-intro-model',        label: 'A New Way to Work' },
+        { id: 'qs-intro-capabilities', label: 'What You Can Build' },
+        { id: 'qs-intro-enterprise',   label: 'Built for Enterprise' },
+        { id: 'qs-step1',              label: 'Step 1 – Create Your Account' },
+        { id: 'qs-step2',              label: 'Step 2 – Meet Your AI Workforce' },
+        { id: 'qs-step3',              label: 'Step 3 – Start Automating' },
+      ]
+    },
+    faq: {
+      nav: 'nav-faq',
+      sections: [
+        { id: 'faq-what',   label: 'What is Odella?' },
+        { id: 'faq-start',  label: 'How do I get started?' },
+        { id: 'faq-free',   label: 'Is there a free plan?' },
+        { id: 'faq-secure', label: 'Is my data secure?' },
+      ]
+    },
+    videos: {
+      nav: 'nav-videos',
+      sections: [
+        { id: 'vid-featured', label: 'Getting Started' },
+        { id: 'vid-more',     label: 'The AI Workforce Factory' },
+        { id: 'vid-build',    label: 'Building Your AI Employees' },
+      ]
+    },
+    workforce: {
+      nav: 'nav-workforce',
+      sections: [
+        { id: 'wf-factory',  label: 'The AI Workforce Factory' },
+        { id: 'wf-build',    label: 'Building Your AI Employees' },
+        { id: 'wf-delegate', label: 'Delegate Work' },
+        { id: 'wf-connect',  label: 'Connecting Applications' },
+        { id: 'wf-scale',    label: 'Scale Without Costs' },
+      ]
+    }
+  };
+
+  let otpObserver = null;
+
+  function showPage(name) {
+    if (!pages[name]) return;
+
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+
+    document.querySelectorAll('.nav-section a').forEach(a => a.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+
+    // rebuild OTP list
+    const otpList = document.getElementById('otp-list');
+    otpList.innerHTML = pages[name].sections.map((s, i) =>
+      `<li><a href="#${s.id}" data-id="${s.id}" class="${i === 0 ? 'active' : ''}">${s.label}</a></li>`
+    ).join('');
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // re-run reveals for new page
+    document.querySelectorAll('#page-' + name + ' .reveal').forEach(el => {
+      el.classList.remove('visible');
+    });
+    setTimeout(() => triggerReveals(name), 50);
+    setupOtp(name);
+  }
+
+  function triggerReveals(name) {
+    const els = document.querySelectorAll('#page-' + name + ' .reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(el => obs.observe(el));
+  }
+
+  function setupOtp(name) {
+    if (otpObserver) otpObserver.disconnect();
+    const ids = pages[name].sections.map(s => s.id);
+    otpObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.otp-list a').forEach(a => a.classList.remove('active'));
+          const link = document.querySelector(`.otp-list a[data-id="${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -65% 0px' });
+    ids.forEach(id => { const el = document.getElementById(id); if (el) otpObserver.observe(el); });
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(() => btn.innerHTML = orig, 1500);
+    });
+  }
+
+  // Init
+  showPage('quickstart');
+</script>
+</body>
+</html>
