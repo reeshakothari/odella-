@@ -157,7 +157,7 @@ window.showPage = function(name) {
 
   const otpList = document.getElementById('otp-list');
   otpList.innerHTML = pages[name].sections.map((s, i) =>
-    `<li><a href="#${s.id}" data-id="${s.id}" class="${i === 0 ? 'active' : ''}">${s.label}</a></li>`
+    `<li><a href="#" onclick="scrollToSection('${s.id}');return false;" data-id="${s.id}" class="${i === 0 ? 'active' : ''}">${s.label}</a></li>`
   ).join('');
 
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -191,6 +191,13 @@ function setupOtp(name) {
   }, { rootMargin: '-20% 0px -65% 0px' });
   ids.forEach(id => { const el = document.getElementById(id); if (el) otpObserver.observe(el); });
 }
+
+window.scrollToSection = function(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top, behavior: 'smooth' });
+};
 
 window.copyLink = function() {
   navigator.clipboard.writeText(window.location.href).then(() => {
