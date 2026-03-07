@@ -7,7 +7,7 @@ export const videosPage = `
   </div>
 
   <div class="step-block reveal" id="vid-featured">
-    <h2>Getting Started</h2>
+    <h2 style="cursor:pointer;" onclick="showPage('quickstart');setTimeout(()=>scrollToSection('qs-step1'),80);">Getting Started <span style="font-size:0.9rem;color:var(--brand);">↗</span></h2>
     <p class="step-desc">A complete walkthrough — from creating your account to launching your first AI workflow.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
@@ -18,7 +18,7 @@ export const videosPage = `
   </div>
 
   <div class="step-block reveal" id="vid-more">
-    <h2>The AI Workforce Factory</h2>
+    <h2 style="cursor:pointer;" onclick="showPage('workforce');setTimeout(()=>scrollToSection('wf-factory'),80);">The AI Workforce Factory <span style="font-size:0.9rem;color:var(--brand);">↗</span></h2>
     <p class="step-desc">See how Odella lets you design, build, and deploy purpose-built AI employees that work to your standards around the clock.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
@@ -29,7 +29,7 @@ export const videosPage = `
   </div>
 
   <div class="step-block reveal" id="vid-build">
-    <h2>Building Your AI Employees</h2>
+    <h2 style="cursor:pointer;" onclick="showPage('workforce');setTimeout(()=>scrollToSection('wf-build'),80);">Building Your AI Employees <span style="font-size:0.9rem;color:var(--brand);">↗</span></h2>
     <p class="step-desc">A step-by-step walkthrough of creating a custom AI employee — from defining a role to deploying it in your workflow.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
