@@ -18,7 +18,7 @@ export const workforcePage = `
     <p>These aren't general-purpose assistants. They're purpose-built employees that slot into your real workflows, handle your process work, and free your team to focus on the judgement-heavy tasks that actually need a human.</p>
     <div class="video-wrap" style="margin-bottom:1rem;">
       <video autoplay muted loop playsinline controls>
-        <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.05.43 PM.mp4" type="video/mp4">
+        <source src="/video-workforce-factory.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: The AI Workforce Factory overview</p>
@@ -35,7 +35,7 @@ export const workforcePage = `
     <p>You can deploy a pre-built AI employee or create a custom one from scratch. Here's how to build a new one:</p>
     <div class="video-wrap" style="margin-bottom:1rem;">
       <video autoplay muted loop playsinline controls>
-        <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.13.04 PM.mp4" type="video/mp4">
+        <source src="/video-build-employees.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: Building your AI employees step by step</p>

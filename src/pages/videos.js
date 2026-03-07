@@ -11,7 +11,7 @@ export const videosPage = `
     <p class="step-desc">A complete walkthrough — from creating your account to launching your first AI workflow.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
-        <source src="../Downloads/WhatsApp Video 2026-03-07 at 1.09.23 PM.mp4" type="video/mp4">
+        <source src="/video-onboarding.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: Full Odella onboarding walkthrough</p>
@@ -22,7 +22,7 @@ export const videosPage = `
     <p class="step-desc">See how Odella lets you design, build, and deploy purpose-built AI employees that work to your standards around the clock.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
-        <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.05.43 PM.mp4" type="video/mp4">
+        <source src="/video-workforce-factory.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: The AI Workforce Factory overview</p>
@@ -33,7 +33,7 @@ export const videosPage = `
     <p class="step-desc">A step-by-step walkthrough of creating a custom AI employee — from defining a role to deploying it in your workflow.</p>
     <div class="video-wrap" style="margin-bottom:0.75rem;">
       <video autoplay muted loop playsinline controls>
-        <source src="../OneDrive/Desktop/Blueprxnt/WhatsApp Video 2026-03-07 at 3.13.04 PM.mp4" type="video/mp4">
+        <source src="/video-build-employees.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: Building your AI employees step by step</p>

@@ -79,7 +79,7 @@ export const quickstartPage = `
     <p class="step-desc">Get into Odella in under two minutes. No credit card required — just pick your sign-in method and you're in.</p>
     <div class="video-wrap">
       <video autoplay muted loop playsinline>
-        <source src="../Downloads/WhatsApp Video 2026-03-07 at 1.09.23 PM.mp4" type="video/mp4">
+        <source src="/video-onboarding.mp4" type="video/mp4">
       </video>
     </div>
     <p class="video-caption">Watch: Creating your Odella account from start to finish</p>
