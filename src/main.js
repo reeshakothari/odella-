@@ -63,7 +63,8 @@ document.querySelector('#app').innerHTML = `
     Odella
   </a>
   <ul class="nav-links">
-    <li><a href="https://odella.ai" target="_blank" class="nav-cta">Go to Odella</a></li>
+    <li class="nav-hide-mobile"><a href="https://odella.ai" target="_blank" class="nav-cta">Go to Odella</a></li>
+    <li class="nav-show-mobile"><a onclick="showPage('videos')" class="nav-cta" style="cursor:pointer;display:flex;align-items:center;gap:0.4rem;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Video Tutorials</a></li>
   </ul>
 </header>
 

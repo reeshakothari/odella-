@@ -385,11 +385,15 @@ body {
 .page { display: none; }
 .page.active { display: block; }
 
+.nav-show-mobile { display: none; }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 780px) {
   .right-sidebar { display: none; }
   :root { --left-w: 0px; }
   .left-sidebar { display: none; }
   .shell { grid-template-columns: 1fr; }
+  .nav-hide-mobile { display: none; }
+  .nav-show-mobile { display: block; }
   .main { padding: 2rem 1.25rem 4rem; }
 }
